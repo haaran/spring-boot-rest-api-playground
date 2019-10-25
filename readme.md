@@ -179,4 +179,9 @@ Hello World
 ## H2 Console
 
 - http://localhost:5000/h2-console
-- Use `jdbc:h2:mem:testdb` as JDBC URL 
+- Use `jdbc:h2:mem:testdb` as JDBC URL
+
+
+## Deploy to Heroku
+Get HEROKU_API_KEY from https://dashboard.heroku.com/account
+HEROKU_API_KEY=9d2ec761-5288-4161-8d43-e0d54e5ed728 mvn heroku:deploy
