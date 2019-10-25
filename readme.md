@@ -183,5 +183,35 @@ Hello World
 
 
 ## Deploy to Heroku
-Get HEROKU_API_KEY from https://dashboard.heroku.com/account
-HEROKU_API_KEY=9d2ec761-5288-4161-8d43-e0d54e5ed728 mvn heroku:deploy
+- Get HEROKU_API_KEY from https://dashboard.heroku.com/account
+- To eliminate Heroku CLI installation, the Maven plugin can be executed as given below:
+```
+ HEROKU_API_KEY=9d2ec761-5288-4161-8d43-e0d54e5ed728 mvn heroku:deploy
+```
+-Configure pom.xml file with following
+
+```
+<properties>
+   <full-artifact-name>target/${project.artifactId}-${project.version}.jar</full-artifact-name>
+</properties>
+<build>
+ <plugins>
+  <plugin>
+      <groupId>com.heroku.sdk</groupId>
+      <artifactId>heroku-maven-plugin</artifactId>
+      <version>1.1.1</version>
+      <configuration>
+          <appName>spring-boot-rest-apis</appName>
+          <includeTarget>false</includeTarget>
+          <includes>
+              <include>${basedir}/${full-artifact-name}</include>
+          </includes>
+          <jdkVersion>1.8</jdkVersion>
+          <processTypes>
+              <web>java $JAVA_OPTS -jar ${full-artifact-name}</web>
+          </processTypes>
+      </configuration>
+  </plugin>
+ </plugins>
+</build>
+```
